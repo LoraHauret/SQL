@@ -1,8 +1,8 @@
-use Logistic;
+ï»¿use Logistic;
 
 --GROUP BY AND HAVING:
---1. Ïîêàçàòü òîâàðû, ñðåäíÿÿ öåíà ïðîäàæè êîòîðûõ áûëà áîëüøå 50 ãðèâåí
-/*SELECT p.id, p.name, p.price,   SUM((p.price - p.price* dsc.percnt) * d.quantity)  / SUM(d.quantity) as 'ñðåäíÿÿ öåíà ïðîäàæè'
+--1. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹, ÑÑ€ÐµÐ´Ð½ÑÑ Ñ†ÐµÐ½Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð±Ñ‹Ð»Ð° Ð±Ð¾Ð»ÑŒÑˆÐµ 50 Ð³Ñ€Ð¸Ð²ÐµÐ½
+/*SELECT p.id, p.name, p.price,   SUM((p.price - p.price* dsc.percnt) * d.quantity)  / SUM(d.quantity) as 'ÑÑ€ÐµÐ´Ð½ÑÑ Ñ†ÐµÐ½Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸'
 FROM Product p JOIN Delivery d
 ON p.id = d.product_id
 JOIN Discount dsc
@@ -15,9 +15,9 @@ having  SUM((p.price - p.price* dsc.percnt) * d.quantity)  / SUM(d.quantity) > 5
 --from Product p1 JOIN Delivery d1
 --ON p1.id = d1.product_id
 --order by 2
---2. Âûâåñòè êîëè÷åñòâî òîâàðîâ êàæäîé êàòåãîðèè, ñðåäíÿÿ öåíà ïîñòàâêè êîòîðûõ áîëüøå 100 ãðèâåí
+--2. Ð’Ñ‹Ð²ÐµÑÑ‚Ð¸ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² ÐºÐ°Ð¶Ð´Ð¾Ð¹ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸, ÑÑ€ÐµÐ´Ð½ÑÑ Ñ†ÐµÐ½Ð° Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð±Ð¾Ð»ÑŒÑˆÐµ 100 Ð³Ñ€Ð¸Ð²ÐµÐ½
 /*
-SELECT ct.id, ct.name as 'íàçâàíèå êàòåãîðèè', COUNT(p.id)as 'êîëè÷åñòâî òîâàðîâ â êàòåãîðèè', AVG(d.price)
+SELECT ct.id, ct.name as 'Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸', COUNT(p.id)as 'ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² Ð² ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸', AVG(d.price)
 FROM Delivery d JOIN Product p 
 ON p.id = d.product_id
 JOIN Category ct
@@ -26,10 +26,10 @@ GROUP BY ct.id, ct.name
 HAVING AVG(d.price) > 100
 */
 
---3. Ïîêàçàòü êàòåãîðèè "Ôðóêòû" è "Êîíôåòû", ïðèíàäëåæàùèå èì òîâàðû, è îáùóþ ñóììó èõ ïðîäàæè
+--3. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ "Ð¤Ñ€ÑƒÐºÑ‚Ñ‹" Ð¸ "ÐšÐ¾Ð½Ñ„ÐµÑ‚Ñ‹", Ð¿Ñ€Ð¸Ð½Ð°Ð´Ð»ÐµÐ¶Ð°Ñ‰Ð¸Ðµ Ð¸Ð¼ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹, Ð¸ Ð¾Ð±Ñ‰ÑƒÑŽ ÑÑƒÐ¼Ð¼Ñƒ Ð¸Ñ… Ð¿Ñ€Ð¾Ð´Ð°Ð¶Ð¸
 /*
 
-Select c.id, c.name as 'íàçâàíèå êàòåãîðèè', SUM(p.price * d.quantity) as 'îáùàÿ ñóììà ïðîäàæ ïî êàòåãîðèè'
+Select c.id, c.name as 'Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸', SUM(p.price * d.quantity) as 'Ð¾Ð±Ñ‰Ð°Ñ ÑÑƒÐ¼Ð¼Ð° Ð¿Ñ€Ð¾Ð´Ð°Ð¶ Ð¿Ð¾ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸'
 From Product  p JOIN Category c
 ON p.category_id = c.id
 JOIN Delivery d ON d.product_id = p.id	
@@ -38,7 +38,7 @@ group by c.id, c.name
 
 */
 
------------äëÿ ïðîâåðêè íàëè÷èÿ òîâàðîâ ïî óêàçàííûì êàòåãîðèÿì-------
+-----------Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ñ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² Ð¿Ð¾ ÑƒÐºÐ°Ð·Ð°Ð½Ð½Ñ‹Ð¼ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸ÑÐ¼-------
 /*
 Select c.id, c.name, p.id, p.name, c.id, c.name, p.name, p.price, d.quantity, p.price* d.quantity
 From Product  p JOIN Category c
@@ -46,9 +46,9 @@ ON p.category_id = c.id
 JOIN Delivery d ON d.product_id = p.id	
 WHERE c.id in (4, 10)
 */
---4. Ïîêàçàòü èíôîðìàöèþ î ïðîèçâîäèòåëå, åãî ïîëíîì àäðåñå, è êîëè÷åñòâå òîâàðîâ, êîòîðûå îí âûïóñêàåò. Îáùàÿ ñòîèìîñòü ïðîäàæ òîâàðîâ êàæäîãî ïðîèçâîäèòåëÿ ïðè ýòîì äîëæíà áûòü îò 500 äî -2000- ãðèâåí
+--4. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ðµ, ÐµÐ³Ð¾ Ð¿Ð¾Ð»Ð½Ð¾Ð¼ Ð°Ð´Ñ€ÐµÑÐµ, Ð¸ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ðµ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð², ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¾Ð½ Ð²Ñ‹Ð¿ÑƒÑÐºÐ°ÐµÑ‚. ÐžÐ±Ñ‰Ð°Ñ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¿Ñ€Ð¾Ð´Ð°Ð¶ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ Ð¿Ñ€Ð¸ ÑÑ‚Ð¾Ð¼ Ð´Ð¾Ð»Ð¶Ð½Ð° Ð±Ñ‹Ñ‚ÑŒ Ð¾Ñ‚ 500 Ð´Ð¾ -2000- Ð³Ñ€Ð¸Ð²ÐµÐ½
 /*
-SELECT pr.id, pr.name 'ïðîèçâîäèòåëü', a.street +' ' + c.name +' ' + r.name+' '  + cnt.name as 'àäðåñ', COUNT(pr.id) as 'êîëè÷åñòâî âûïóñêàåìûõ òîâàðîâ', SUM(p.price * d.quantity) as 'îáùàÿ ñòîèìîñòü ïðîäàæ'--p.name, p.price, d.product_id, d.quantity, p.price *d.quantity 
+SELECT pr.id, pr.name 'Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒ', a.street +' ' + c.name +' ' + r.name+' '  + cnt.name as 'Ð°Ð´Ñ€ÐµÑ', COUNT(pr.id) as 'ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð²Ñ‹Ð¿ÑƒÑÐºÐ°ÐµÐ¼Ñ‹Ñ… Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²', SUM(p.price * d.quantity) as 'Ð¾Ð±Ñ‰Ð°Ñ ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¿Ñ€Ð¾Ð´Ð°Ð¶'--p.name, p.price, d.product_id, d.quantity, p.price *d.quantity 
 FROM Producer pr JOIN Product p ON pr.id = p.producer_id
 --JOIN 
 JOIN Address a ON a.id = p.producer_id 
@@ -61,8 +61,8 @@ having SUM(p.price * d.quantity)>2000
 order by 1
 */
 /*
--------------äëÿ ïðîâåðêè------------
-SELECT pr.id, pr.name 'ïðîèçâîäèòåëü', a.street +' ' + c.name +' ' + r.name+' '  + cnt.name as 'àäðåñ', p.name, p.price, d.product_id, d.quantity, p.price *d.quantity 
+-------------Ð´Ð»Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸------------
+SELECT pr.id, pr.name 'Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒ', a.street +' ' + c.name +' ' + r.name+' '  + cnt.name as 'Ð°Ð´Ñ€ÐµÑ', p.name, p.price, d.product_id, d.quantity, p.price *d.quantity 
 FROM Producer pr JOIN Product p ON pr.id = p.producer_id
 JOIN Address a ON a.id = p.producer_id 
 JOIN City c ON a.city_id = c.id
@@ -73,9 +73,9 @@ order by 2
 */
 
 
---5. Ïîêàçàòü êàòåãîðèþ, òîâàðîâ êîòîðîé â ìàãàçèíå ìåíüøå âñåãî
+--5. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸ÑŽ, Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð² Ð¼Ð°Ð³Ð°Ð·Ð¸Ð½Ðµ Ð¼ÐµÐ½ÑŒÑˆÐµ Ð²ÑÐµÐ³Ð¾
 /*
-Select TOP 1 c.id, c.name as 'íàçâàíèå êàòåãîðèè', MIN(p.id) as 'êîëè÷åñòâî òîâàðîâ'
+Select TOP 1 c.id, c.name as 'Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸', MIN(p.id) as 'ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²'
 From Product  p JOIN Category c
 ON p.category_id = c.id
 JOIN Delivery d ON d.product_id = p.id	
@@ -84,8 +84,8 @@ order by 3
 */
 
 
---6. Ïîêàçàòü êîëè÷åñòâî òîâàðîâ êàæäîé êàòåãîðèè, ïðè ýòîì ó÷èòûâàÿ òîëüêî òå òîâàðû, ñòîèìîñòü ïîñòàâêè êîòîðûõ ïðåâûøàëà 400 ãðèâåí. Óñëîâèå: âûâåäåííàÿ èíôîðìàöèÿ êàñàåòñÿ òîëüêî òð¸õ îïðåäåë¸ííûõ ïîñòàâùèêîâ
-SELECT c.id, c.name, COUNT(p.id) as 'êîëè÷åñòâî òîâàðîâ', SUM(d.price) as 'ñòîèìîñòü äîñòàâêè > 400 ãðí.'
+--6. ÐŸÐ¾ÐºÐ°Ð·Ð°Ñ‚ÑŒ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð² ÐºÐ°Ð¶Ð´Ð¾Ð¹ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸, Ð¿Ñ€Ð¸ ÑÑ‚Ð¾Ð¼ ÑƒÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°Ñ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ‚Ðµ Ñ‚Ð¾Ð²Ð°Ñ€Ñ‹, ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð¿Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ñ… Ð¿Ñ€ÐµÐ²Ñ‹ÑˆÐ°Ð»Ð° 400 Ð³Ñ€Ð¸Ð²ÐµÐ½. Ð£ÑÐ»Ð¾Ð²Ð¸Ðµ: Ð²Ñ‹Ð²ÐµÐ´ÐµÐ½Ð½Ð°Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ ÐºÐ°ÑÐ°ÐµÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ‚Ñ€Ñ‘Ñ… Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‘Ð½Ð½Ñ‹Ñ… Ð¿Ð¾ÑÑ‚Ð°Ð²Ñ‰Ð¸ÐºÐ¾Ð²
+SELECT c.id, c.name, COUNT(p.id) as 'ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ‚Ð¾Ð²Ð°Ñ€Ð¾Ð²', SUM(d.price) as 'ÑÑ‚Ð¾Ð¸Ð¼Ð¾ÑÑ‚ÑŒ Ð´Ð¾ÑÑ‚Ð°Ð²ÐºÐ¸ > 400 Ð³Ñ€Ð½.'
 FROM Product p JOIN Category c ON p.category_id = c.id
 JOIN Delivery d ON p.id = d.product_id
 group by c.id, c.name
