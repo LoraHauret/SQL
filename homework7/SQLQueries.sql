@@ -1,28 +1,28 @@
---USE Logistic;
+п»ї--USE Logistic;
 
 /*
 
-Файл
-Д3.txt
-Изменить
-Просмотр
+Р¤Р°Р№Р»
+Р”3.txt
+РР·РјРµРЅРёС‚СЊ
+РџСЂРѕСЃРјРѕС‚СЂ
 +
-SUBQUERIES (в решении обязательно использовать минимум один подзапрос!):
+SUBQUERIES (РІ СЂРµС€РµРЅРёРё РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РјРёРЅРёРјСѓРј РѕРґРёРЅ РїРѕРґР·Р°РїСЂРѕСЃ!):
 
 
 CREATE TABLE:
-1. написать запросы на создание шести таблиц БД Издательства (картинка прилагается тут)
+1. РЅР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃС‹ РЅР° СЃРѕР·РґР°РЅРёРµ С€РµСЃС‚Рё С‚Р°Р±Р»РёС† Р‘Р” РР·РґР°С‚РµР»СЊСЃС‚РІР° (РєР°СЂС‚РёРЅРєР° РїСЂРёР»Р°РіР°РµС‚СЃСЏ С‚СѓС‚)
 =======
 =======
-VIEWS (факультативно):
-1. Показать все продажи, где есть продукты из отдела "Молочка".
-2. Показать все продукты из категории "Мясо", у которых количество на складе меньше 50 единиц.
-3. Показать наиболее продаваемые товары из отдела "Канцтовары" за последние 3 месяца.
-4. Показать статистику продаж по всем продуктам "Молочка" и "Мясо" в разрезе каждого месяца за последний год.
-5. Показать товары из отдела "Канцтовары", которые так и не были ни разу проданы за последние 90 дней.
+VIEWS (С„Р°РєСѓР»СЊС‚Р°С‚РёРІРЅРѕ):
+1. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РїСЂРѕРґР°Р¶Рё, РіРґРµ РµСЃС‚СЊ РїСЂРѕРґСѓРєС‚С‹ РёР· РѕС‚РґРµР»Р° "РњРѕР»РѕС‡РєР°".
+2. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РїСЂРѕРґСѓРєС‚С‹ РёР· РєР°С‚РµРіРѕСЂРёРё "РњСЏСЃРѕ", Сѓ РєРѕС‚РѕСЂС‹С… РєРѕР»РёС‡РµСЃС‚РІРѕ РЅР° СЃРєР»Р°РґРµ РјРµРЅСЊС€Рµ 50 РµРґРёРЅРёС†.
+3. РџРѕРєР°Р·Р°С‚СЊ РЅР°РёР±РѕР»РµРµ РїСЂРѕРґР°РІР°РµРјС‹Рµ С‚РѕРІР°СЂС‹ РёР· РѕС‚РґРµР»Р° "РљР°РЅС†С‚РѕРІР°СЂС‹" Р·Р° РїРѕСЃР»РµРґРЅРёРµ 3 РјРµСЃСЏС†Р°.
+4. РџРѕРєР°Р·Р°С‚СЊ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїСЂРѕРґР°Р¶ РїРѕ РІСЃРµРј РїСЂРѕРґСѓРєС‚Р°Рј "РњРѕР»РѕС‡РєР°" Рё "РњСЏСЃРѕ" РІ СЂР°Р·СЂРµР·Рµ РєР°Р¶РґРѕРіРѕ РјРµСЃСЏС†Р° Р·Р° РїРѕСЃР»РµРґРЅРёР№ РіРѕРґ.
+5. РџРѕРєР°Р·Р°С‚СЊ С‚РѕРІР°СЂС‹ РёР· РѕС‚РґРµР»Р° "РљР°РЅС†С‚РѕРІР°СЂС‹", РєРѕС‚РѕСЂС‹Рµ С‚Р°Рє Рё РЅРµ Р±С‹Р»Рё РЅРё СЂР°Р·Сѓ РїСЂРѕРґР°РЅС‹ Р·Р° РїРѕСЃР»РµРґРЅРёРµ 90 РґРЅРµР№.
 */
 
---1. Показать самый популярный товар магазина (больше всего раз продавался)
+--1. РџРѕРєР°Р·Р°С‚СЊ СЃР°РјС‹Р№ РїРѕРїСѓР»СЏСЂРЅС‹Р№ С‚РѕРІР°СЂ РјР°РіР°Р·РёРЅР° (Р±РѕР»СЊС€Рµ РІСЃРµРіРѕ СЂР°Р· РїСЂРѕРґР°РІР°Р»СЃСЏ)
 /*
 
 SELECT p.id, p.name, COUNT(1)
@@ -34,59 +34,59 @@ HAVING COUNT(1) >= (SELECT MAX(SaleCount)  FROM
 ORDER BY 1
 */
 
---2. Если общее количество товаров всех категорий принять за 100%, необходимо посчитать, сколько товаров каждой категории (в процентном отношении) было продано
------вариант № 1----------
+--2. Р•СЃР»Рё РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ РІСЃРµС… РєР°С‚РµРіРѕСЂРёР№ РїСЂРёРЅСЏС‚СЊ Р·Р° 100%, РЅРµРѕР±С…РѕРґРёРјРѕ РїРѕСЃС‡РёС‚Р°С‚СЊ, СЃРєРѕР»СЊРєРѕ С‚РѕРІР°СЂРѕРІ РєР°Р¶РґРѕР№ РєР°С‚РµРіРѕСЂРёРё (РІ РїСЂРѕС†РµРЅС‚РЅРѕРј РѕС‚РЅРѕС€РµРЅРёРё) Р±С‹Р»Рѕ РїСЂРѕРґР°РЅРѕ
+-----РІР°СЂРёР°РЅС‚ в„– 1----------
 /*
-SELECT  p.category_id, c.name, COUNT(1) AS 'Количество товаров в категории', 
-FORMAT(  COUNT(1) * 100.0 / (SELECT COUNT(1) FROM Product),'N2'   )  AS '% продаж относительно общего количества товаров'  --ROUND(COUNT(1) * 100.0 / (SELECT COUNT(1),2) FROM Product)  AS '%% продаж относительно общего количества товаров' 
+SELECT  p.category_id, c.name, COUNT(1) AS 'РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ РІ РєР°С‚РµРіРѕСЂРёРё', 
+FORMAT(  COUNT(1) * 100.0 / (SELECT COUNT(1) FROM Product),'N2'   )  AS '% РїСЂРѕРґР°Р¶ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕР±С‰РµРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° С‚РѕРІР°СЂРѕРІ'  --ROUND(COUNT(1) * 100.0 / (SELECT COUNT(1),2) FROM Product)  AS '%% РїСЂРѕРґР°Р¶ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РѕР±С‰РµРіРѕ РєРѕР»РёС‡РµСЃС‚РІР° С‚РѕРІР°СЂРѕРІ' 
 FROM Product p JOIN Category c ON c.id = p.category_id
 JOIN Delivery d ON d.product_id = p.id
 GROUP BY p.category_id, c.name;
 
-------ВАРИАНТ 2 с использованием COMMON TABLE EXPRESSION---------
+------Р’РђР РРђРќРў 2 СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј COMMON TABLE EXPRESSION---------
 WITH TotalProducts AS (
     SELECT COUNT(1) AS TotalCount FROM Product)
 
 SELECT  
     p.category_id, 
     c.name, 
-    COUNT(1) AS 'Количество товаров в категории',
-    FORMAT(COUNT(1) * 100.0 / (SELECT TotalCount FROM TotalProducts), 'N2') AS 'Процент от общего числа товаров'
+    COUNT(1) AS 'РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ РІ РєР°С‚РµРіРѕСЂРёРё',
+    FORMAT(COUNT(1) * 100.0 / (SELECT TotalCount FROM TotalProducts), 'N2') AS 'РџСЂРѕС†РµРЅС‚ РѕС‚ РѕР±С‰РµРіРѕ С‡РёСЃР»Р° С‚РѕРІР°СЂРѕРІ'
 FROM Product p
 JOIN Category c ON c.id = p.category_id
 JOIN Delivery d ON d.product_id = p.id
 GROUP BY p.category_id, c.name;
 
 
--------ВАРИАНТ № 3 с использованием переменной, в которую выбирается количество всех продуктов---------------
+-------Р’РђР РРђРќРў в„– 3 СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РїРµСЂРµРјРµРЅРЅРѕР№, РІ РєРѕС‚РѕСЂСѓСЋ РІС‹Р±РёСЂР°РµС‚СЃСЏ РєРѕР»РёС‡РµСЃС‚РІРѕ РІСЃРµС… РїСЂРѕРґСѓРєС‚РѕРІ---------------
 DECLARE @TotalCount INT;
 SELECT @TotalCount = COUNT(1) FROM Product;
 
-SELECT  c.id, C.name, COUNT(1) AS 'Количество товаров в категории', FORMAT(COUNT(1) * 100.0 / @TotalCount, 'N2') AS 'Процент от общего числа товаров'
+SELECT  c.id, C.name, COUNT(1) AS 'РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ РІ РєР°С‚РµРіРѕСЂРёРё', FORMAT(COUNT(1) * 100.0 / @TotalCount, 'N2') AS 'РџСЂРѕС†РµРЅС‚ РѕС‚ РѕР±С‰РµРіРѕ С‡РёСЃР»Р° С‚РѕРІР°СЂРѕРІ'
 FROM Product p JOIN Category c ON c.id = p.category_id
 JOIN Delivery d ON d.product_id = p.id
 GROUP BY c.id, C.name
 */
 
---3. Показать названия поставщиков, которые не поставляли йогурт
+--3. РџРѕРєР°Р·Р°С‚СЊ РЅР°Р·РІР°РЅРёСЏ РїРѕСЃС‚Р°РІС‰РёРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ РЅРµ РїРѕСЃС‚Р°РІР»СЏР»Рё Р№РѕРіСѓСЂС‚
 /*
 SELECT s.id, s.name 
 FROM Supplier s
 WHERE s.id NOT IN (	SELECT s.id
 					FROM Product p JOIN Delivery d ON d.product_id = p.id
 					JOIN Supplier s ON s.id = d.supplier_id
-					WHERE p.name LIKE '%Йогурт%');
+					WHERE p.name LIKE '%Р™РѕРіСѓСЂС‚%');
 
----или вот так, методом исключения первого попадения в условие---
+---РёР»Рё РІРѕС‚ С‚Р°Рє, РјРµС‚РѕРґРѕРј РёСЃРєР»СЋС‡РµРЅРёСЏ РїРµСЂРІРѕРіРѕ РїРѕРїР°РґРµРЅРёСЏ РІ СѓСЃР»РѕРІРёРµ---
 SELECT s.id, s.name 
 FROM Supplier s
 WHERE NOT EXISTS (	SELECT 1
 					FROM Product p JOIN Delivery d ON d.product_id = p.id
-					WHERE d.supplier_id = s.id and p.name LIKE '%Йогурт%');
+					WHERE d.supplier_id = s.id and p.name LIKE '%Р™РѕРіСѓСЂС‚%');
 */
 
 
---4*. Показать на экран список производителей, которые живут в той же стране, что и фирма 000 "Зеленоглазое такси"
+--4*. РџРѕРєР°Р·Р°С‚СЊ РЅР° СЌРєСЂР°РЅ СЃРїРёСЃРѕРє РїСЂРѕРёР·РІРѕРґРёС‚РµР»РµР№, РєРѕС‚РѕСЂС‹Рµ Р¶РёРІСѓС‚ РІ С‚РѕР№ Р¶Рµ СЃС‚СЂР°РЅРµ, С‡С‚Рѕ Рё С„РёСЂРјР° 000 "Р—РµР»РµРЅРѕРіР»Р°Р·РѕРµ С‚Р°РєСЃРё"
 ------------------------1-----------------------------
 /*
 SELECT p.id, p.name,  pcnt.id, pcnt.name 
@@ -100,7 +100,7 @@ HAVING pcnt.id =  (SELECT cnt.id
 				JOIN City c ON a.city_id = c.id
 				JOIN Region rgn ON rgn.id = c.region_id
 				JOIN Country cnt ON rgn.country_id = cnt.id
-				WHERE org.name LIKE '%Зеленоглазое такси%'
+				WHERE org.name LIKE '%Р—РµР»РµРЅРѕРіР»Р°Р·РѕРµ С‚Р°РєСЃРё%'
 				);
 
 ------------------2-----------------------
@@ -110,7 +110,7 @@ SELECT @CountryID =  cnt.id
 				JOIN City c ON a.city_id = c.id
 				JOIN Region rgn ON rgn.id = c.region_id
 				JOIN Country cnt ON rgn.country_id = cnt.id
-				WHERE org.name LIKE '%Зеленоглазое такси%';
+				WHERE org.name LIKE '%Р—РµР»РµРЅРѕРіР»Р°Р·РѕРµ С‚Р°РєСЃРё%';
 
 SELECT p.id, p.name,  pcnt.id, pcnt.name 
 FROM Producer p JOIN Address pa ON p.address_id = pa.id
@@ -120,27 +120,27 @@ JOIN Country pcnt ON prgn.country_id = pcnt.id
 WHERE pcnt.id =  @CountryID;
 */
 
--- 5. Показать всех производителей, количество наименований товаров которых в магазине больше, чем количество наименований всех товаров фирмы ООО «Крустикс»
+-- 5. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµС… РїСЂРѕРёР·РІРѕРґРёС‚РµР»РµР№, РєРѕР»РёС‡РµСЃС‚РІРѕ РЅР°РёРјРµРЅРѕРІР°РЅРёР№ С‚РѕРІР°СЂРѕРІ РєРѕС‚РѕСЂС‹С… РІ РјР°РіР°Р·РёРЅРµ Р±РѕР»СЊС€Рµ, С‡РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РЅР°РёРјРµРЅРѕРІР°РЅРёР№ РІСЃРµС… С‚РѕРІР°СЂРѕРІ С„РёСЂРјС‹ РћРћРћ В«РљСЂСѓСЃС‚РёРєСЃВ»
 /*
-SELECT pr.id, pr.name AS 'ПРОИЗВОДИТЕЛЬ', COUNT(1) AS 'КОЛИЧЕСТВО ТОВАРОВ В МАГАЗИНЕ'
+SELECT pr.id, pr.name AS 'РџР РћРР—Р’РћР”РРўР•Р›Р¬', COUNT(1) AS 'РљРћР›РР§Р•РЎРўР’Рћ РўРћР’РђР РћР’ Р’ РњРђР“РђР—РРќР•'
 FROM Product p JOIN Producer pr ON p.producer_id = pr.id
 GROUP BY pr.id, pr.name
-HAVING COUNT(1) > (SELECT COUNT(1) FROM Product p1 JOIN Producer pr1 ON p1.producer_id = pr1.id WHERE pr1.id = 49) --Крустикс
+HAVING COUNT(1) > (SELECT COUNT(1) FROM Product p1 JOIN Producer pr1 ON p1.producer_id = pr1.id WHERE pr1.id = 49) --РљСЂСѓСЃС‚РёРєСЃ
 ORDER BY 1
 
 ---------------------2----------------------
 DECLARE @CountGoods INT;
 SELECT @CountGoods = COUNT(1) FROM Product p1 JOIN Producer pr1 ON p1.producer_id = pr1.id WHERE pr1.id = 49;
 
-SELECT pr.id, pr.name AS 'ПРОИЗВОДИТЕЛЬ', COUNT(1) AS 'КОЛИЧЕСТВО ТОВАРОВ В МАГАЗИНЕ'
+SELECT pr.id, pr.name AS 'РџР РћРР—Р’РћР”РРўР•Р›Р¬', COUNT(1) AS 'РљРћР›РР§Р•РЎРўР’Рћ РўРћР’РђР РћР’ Р’ РњРђР“РђР—РРќР•'
 FROM Product p JOIN Producer pr ON p.producer_id = pr.id
 GROUP BY pr.id, pr.name
-HAVING COUNT(1) > @CountGoods --Крустикс
+HAVING COUNT(1) > @CountGoods --РљСЂСѓСЃС‚РёРєСЃ
 ORDER BY 1*/
 
---6. Показать общее количество продаж по каждому дню, начиная от 15.11.2024, и по сей день. Отсортировать по убыванию даты 
+--6. РџРѕРєР°Р·Р°С‚СЊ РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРѕРґР°Р¶ РїРѕ РєР°Р¶РґРѕРјСѓ РґРЅСЋ, РЅР°С‡РёРЅР°СЏ РѕС‚ 15.11.2024, Рё РїРѕ СЃРµР№ РґРµРЅСЊ. РћС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ СѓР±С‹РІР°РЅРёСЋ РґР°С‚С‹ 
 /*
-SELECT s.date_of_sale AS 'ДАТА', COUNT(1) AS 'КОЛИЧЕСТВО ПРОДАЖ', SUM(p.price) AS 'СУММА ПРОДАЖ (грн.)'
+SELECT s.date_of_sale AS 'Р”РђРўРђ', COUNT(1) AS 'РљРћР›РР§Р•РЎРўР’Рћ РџР РћР”РђР–', SUM(p.price) AS 'РЎРЈРњРњРђ РџР РћР”РђР– (РіСЂРЅ.)'
 FROM Sale s JOIN Product p ON s.product_id = p.id
 WHERE s.date_of_sale BETWEEN CAST('2025-02-01' AS DATE) AND CAST(GETDATE() AS DATE) 
 GROUP BY s.date_of_sale
@@ -148,7 +148,7 @@ ORDER BY 1 DESC;
 
 ----------------------------------------------------
 
-SELECT SalesData.date_of_sale AS 'ДАТА', COUNT(1) AS 'КОЛИЧЕСТВО ПРОДАЖ', SUM(SalesData.price) AS 'СУММА ПРОДАЖ (грн.)'
+SELECT SalesData.date_of_sale AS 'Р”РђРўРђ', COUNT(1) AS 'РљРћР›РР§Р•РЎРўР’Рћ РџР РћР”РђР–', SUM(SalesData.price) AS 'РЎРЈРњРњРђ РџР РћР”РђР– (РіСЂРЅ.)'
 FROM (SELECT s.date_of_sale, p.price
      FROM Sale s JOIN Product p ON s.product_id = p.id
      WHERE s.date_of_sale BETWEEN CAST('2025-02-01' AS DATE) AND CAST(GETDATE() AS DATE)
@@ -161,11 +161,11 @@ ORDER BY
 */
 
 
---7*. Вычислить количество товаров каждой категории, которые пора списать (их количество известно, и они не продавались вот уже три месяца) ( 4 и 7 можно не делать :) )
+--7*. Р’С‹С‡РёСЃР»РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂРѕРІ РєР°Р¶РґРѕР№ РєР°С‚РµРіРѕСЂРёРё, РєРѕС‚РѕСЂС‹Рµ РїРѕСЂР° СЃРїРёСЃР°С‚СЊ (РёС… РєРѕР»РёС‡РµСЃС‚РІРѕ РёР·РІРµСЃС‚РЅРѕ, Рё РѕРЅРё РЅРµ РїСЂРѕРґР°РІР°Р»РёСЃСЊ РІРѕС‚ СѓР¶Рµ С‚СЂРё РјРµСЃСЏС†Р°) ( 4 Рё 7 РјРѕР¶РЅРѕ РЅРµ РґРµР»Р°С‚СЊ :) )
 
----------------подзапрос в from ------------------
+---------------РїРѕРґР·Р°РїСЂРѕСЃ РІ from ------------------
 /*
-SELECT c.id ID, c.name КАТЕГОРИЯ, SUM(ProductStatus.ProductRest) as 'ТОВАРЫ ДЛЯ СПИСАНИЯ'
+SELECT c.id ID, c.name РљРђРўР•Р“РћР РРЇ, SUM(ProductStatus.ProductRest) as 'РўРћР’РђР Р« Р”Р›РЇ РЎРџРРЎРђРќРРЇ'
 
 FROM (
 	Select d.id AS deliveryid, p.id AS ProductId, p.name, p.category_id, d.quantity, d.quantity - SUM(s.quantity) as ProductRest, DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) AS LifeStatus
@@ -186,7 +186,7 @@ WHERE ProductStatus.ProductRest > 0
 GROUP BY c.id, c.name
 
 */
-------------------------ЗОНА ТЕСТИРОВАНИЯ И ОТЛАДКИ-----------------------------------
+------------------------Р—РћРќРђ РўР•РЎРўРР РћР’РђРќРРЇ Р РћРўР›РђР”РљР-----------------------------------
 /*
 SELECT c.id, c.name, SUM(d.quantity)
 FROM Product p JOIN Delivery d ON p.id = d.product_id
@@ -198,19 +198,19 @@ WHERE DATEDIFF( MONTH, CAST(d.date_of_delivery AS DATE), CAST( GETDATE() AS DATE
 GROUP BY c.id, c.name
 */
 /*
-SELECT p.id, p.name, c.id, c.name, p.name, SUM(s.quantity) as 'ПРОДАНО'--, SUM(d.quantity)
+SELECT p.id, p.name, c.id, c.name, p.name, SUM(s.quantity) as 'РџР РћР”РђРќРћ'--, SUM(d.quantity)
 FROM Product p JOIN Sale s ON p.id = s.product_id
 JOIN Category c ON p.category_id = c.id
 GROUP BY p.id,p.name, c.id, c.name
 order by 1
 
-Select d.id deliveryid, p.id as productid, p.name, COUNT(1) AS 'КОЛИЧЕСТВО ПРОДАЖ', d.quantity, d.quantity - SUM(s.quantity) as 'остаток товара', DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) as 'товару > n месяцев'
+Select d.id deliveryid, p.id as productid, p.name, COUNT(1) AS 'РљРћР›РР§Р•РЎРўР’Рћ РџР РћР”РђР–', d.quantity, d.quantity - SUM(s.quantity) as 'РѕСЃС‚Р°С‚РѕРє С‚РѕРІР°СЂР°', DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) as 'С‚РѕРІР°СЂСѓ > n РјРµСЃСЏС†РµРІ'
 FROM Delivery d JOIN Product p ON d.product_id = p.id
 JOIN Sale s ON s.delivery_id = d.id
 GROUP BY d.id, p.id, p.name, d.quantity, d.date_of_delivery, date_of_sale
 HAVING DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) >= 3*/
 /*
-SELECT d.id, d.product_id, DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) as 'товару > n месяцев'
+SELECT d.id, d.product_id, DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) as 'С‚РѕРІР°СЂСѓ > n РјРµСЃСЏС†РµРІ'
 FROM Delivery d JOIN Sale s ON s.delivery_id = d.id 
 GROUP BY d.id, d.product_id, d.date_of_delivery, date_of_sale
 HAVING DATEDIFF(MONTH, d.date_of_delivery, GETDATE()) >= 3
@@ -237,32 +237,32 @@ WHERE price > (
 --SELECT d.id as delivery_id, d.date_of_delivery as delivery_date, p.id as product_id, p.name as product_name, p.category_id as category_id
 --FROM Delivery d join Product p ON d.product_id = p.id
 
---1. написать запросы на создание шести таблиц БД Издательства (картинка прилагается тут)
---выполнено в отдельном файле CREATE_PUBLISHING_HOUSE.sql
+--1. РЅР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃС‹ РЅР° СЃРѕР·РґР°РЅРёРµ С€РµСЃС‚Рё С‚Р°Р±Р»РёС† Р‘Р” РР·РґР°С‚РµР»СЊСЃС‚РІР° (РєР°СЂС‚РёРЅРєР° РїСЂРёР»Р°РіР°РµС‚СЃСЏ С‚СѓС‚)
+--РІС‹РїРѕР»РЅРµРЅРѕ РІ РѕС‚РґРµР»СЊРЅРѕРј С„Р°Р№Р»Рµ CREATE_PUBLISHING_HOUSE.sql
 
 USE Logistic;
---1. Показать все продажи, где есть продукты из отдела "Молочка".
+--1. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РїСЂРѕРґР°Р¶Рё, РіРґРµ РµСЃС‚СЊ РїСЂРѕРґСѓРєС‚С‹ РёР· РѕС‚РґРµР»Р° "РњРѕР»РѕС‡РєР°".
 /*
 SELECT *
 FROM hw7_v_task1
 */
---2. Показать все продукты из категории "Мясо", у которых количество на складе меньше 50 единиц.
+--2. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РїСЂРѕРґСѓРєС‚С‹ РёР· РєР°С‚РµРіРѕСЂРёРё "РњСЏСЃРѕ", Сѓ РєРѕС‚РѕСЂС‹С… РєРѕР»РёС‡РµСЃС‚РІРѕ РЅР° СЃРєР»Р°РґРµ РјРµРЅСЊС€Рµ 50 РµРґРёРЅРёС†.
 /*
 SELECT *
 FROM hw7_v_task2
 */
 
---3. Показать наиболее продаваемые товары из отдела "Мясо" за последние 3 месяца.
+--3. РџРѕРєР°Р·Р°С‚СЊ РЅР°РёР±РѕР»РµРµ РїСЂРѕРґР°РІР°РµРјС‹Рµ С‚РѕРІР°СЂС‹ РёР· РѕС‚РґРµР»Р° "РњСЏСЃРѕ" Р·Р° РїРѕСЃР»РµРґРЅРёРµ 3 РјРµСЃСЏС†Р°.
 /*
 SELECT *
 FROM hw7_v_task3
 */
---4. Показать статистику продаж по всем продуктам "Молочка" и "Мясо" в разрезе каждого месяца за последний год.
+--4. РџРѕРєР°Р·Р°С‚СЊ СЃС‚Р°С‚РёСЃС‚РёРєСѓ РїСЂРѕРґР°Р¶ РїРѕ РІСЃРµРј РїСЂРѕРґСѓРєС‚Р°Рј "РњРѕР»РѕС‡РєР°" Рё "РњСЏСЃРѕ" РІ СЂР°Р·СЂРµР·Рµ РєР°Р¶РґРѕРіРѕ РјРµСЃСЏС†Р° Р·Р° РїРѕСЃР»РµРґРЅРёР№ РіРѕРґ.
 /*
 SELECT *
 FROM hw7_v_task4
 */
---5. Показать товары из отдела "Мясо", которые так и не были ни разу проданы за последние 90 дней.
+--5. РџРѕРєР°Р·Р°С‚СЊ С‚РѕРІР°СЂС‹ РёР· РѕС‚РґРµР»Р° "РњСЏСЃРѕ", РєРѕС‚РѕСЂС‹Рµ С‚Р°Рє Рё РЅРµ Р±С‹Р»Рё РЅРё СЂР°Р·Сѓ РїСЂРѕРґР°РЅС‹ Р·Р° РїРѕСЃР»РµРґРЅРёРµ 90 РґРЅРµР№.
 /*
 SELECT *
 FROM hw7_v_task5

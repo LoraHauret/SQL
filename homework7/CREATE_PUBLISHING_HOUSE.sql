@@ -1,20 +1,20 @@
---1. написать запросы на создание шести таблиц БД Издательства (картинка прилагается тут)
---Включение доступа к расширенным настройкам, чтобы иметь возможность использовать команды, связанные с системными настройками
+п»ї--1. РЅР°РїРёСЃР°С‚СЊ Р·Р°РїСЂРѕСЃС‹ РЅР° СЃРѕР·РґР°РЅРёРµ С€РµСЃС‚Рё С‚Р°Р±Р»РёС† Р‘Р” РР·РґР°С‚РµР»СЊСЃС‚РІР° (РєР°СЂС‚РёРЅРєР° РїСЂРёР»Р°РіР°РµС‚СЃСЏ С‚СѓС‚)
+--Р’РєР»СЋС‡РµРЅРёРµ РґРѕСЃС‚СѓРїР° Рє СЂР°СЃС€РёСЂРµРЅРЅС‹Рј РЅР°СЃС‚СЂРѕР№РєР°Рј, С‡С‚РѕР±С‹ РёРјРµС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєРѕРјР°РЅРґС‹, СЃРІСЏР·Р°РЅРЅС‹Рµ СЃ СЃРёСЃС‚РµРјРЅС‹РјРё РЅР°СЃС‚СЂРѕР№РєР°РјРё
 EXEC sp_configure 'show advanced options', 1;
 RECONFIGURE;
---Для того чтобы использовать команду удаления xp_cmdshell, необходимо разрешить её выполнение
+--Р”Р»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РєРѕРјР°РЅРґСѓ СѓРґР°Р»РµРЅРёСЏ xp_cmdshell, РЅРµРѕР±С…РѕРґРёРјРѕ СЂР°Р·СЂРµС€РёС‚СЊ РµС‘ РІС‹РїРѕР»РЅРµРЅРёРµ
 EXEC sp_configure 'xp_cmdshell', 1;
 RECONFIGURE;
 
 IF EXISTS (SELECT* FROM sys.databases WHERE name = 'PublishingHouse')
 BEGIN
- USE master; -- переключение на другую базу
-ALTER DATABASE PublishingHouse SET OFFLINE; --отключение базы, которую хочу удалить
+ USE master; -- РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° РґСЂСѓРіСѓСЋ Р±Р°Р·Сѓ
+ALTER DATABASE PublishingHouse SET OFFLINE; --РѕС‚РєР»СЋС‡РµРЅРёРµ Р±Р°Р·С‹, РєРѕС‚РѕСЂСѓСЋ С…РѕС‡Сѓ СѓРґР°Р»РёС‚СЊ
 DROP DATABASE PublishingHouse;
 
 DECLARE @fileExists INT;
 
-EXEC xp_fileexist 'D:\DB\projects\homework7\PublishingHouse.mdf', @fileExists OUTPUT; -- Проверка наличия файла на жд
+EXEC xp_fileexist 'D:\DB\projects\homework7\PublishingHouse.mdf', @fileExists OUTPUT; -- РџСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ С„Р°Р№Р»Р° РЅР° Р¶Рґ
 IF @fileExists = 1
 BEGIN
 	EXEC xp_cmdshell 'del D:\DB\projects\homework7\PublishingHouse.mdf';
@@ -141,9 +141,9 @@ CONSTRAINT FK_Sales_Shop FOREIGN KEY (shop_id) REFERENCES Shops(id)
 END
 
 GO
---Отключение xp_cmdshell после завершения операций
+--РћС‚РєР»СЋС‡РµРЅРёРµ xp_cmdshell РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ РѕРїРµСЂР°С†РёР№
 EXEC sp_configure 'xp_cmdshell', 0;
 RECONFIGURE;
---Отключение доступа к расширенным настройкам
+--РћС‚РєР»СЋС‡РµРЅРёРµ РґРѕСЃС‚СѓРїР° Рє СЂР°СЃС€РёСЂРµРЅРЅС‹Рј РЅР°СЃС‚СЂРѕР№РєР°Рј
 EXEC sp_configure 'show advanced options', 0;
 RECONFIGURE;
